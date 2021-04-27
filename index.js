@@ -9,6 +9,12 @@ program
         const task = args.slice(0, -1).join(' ')
         console.log(task);
     });
+program
+    .command('clear')
+    .description('clear all tasks')
+    .action((...args) => {
+        console.log('this is clear');
+    });
 
 program.parse(process.argv);
 
