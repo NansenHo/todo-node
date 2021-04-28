@@ -13,8 +13,8 @@ program
 program
     .command('clear')
     .description('clear all tasks')
-    .action((...args) => {
-        console.log('this is clear');
+    .action(() => {
+        api.clear()
     });
 
 program.parse(process.argv);
