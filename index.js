@@ -12,3 +12,13 @@ module.exports.add = async (task) => {
 module.exports.clear = async (task) => {
     await db.write([])
 }
+
+module.exports.showAll = async () => {
+    // 读取之前的任务
+    const list = await db.read()
+    // 打印之前的任务
+    list.forEach((item, index) => {
+        console.log(`${item.done ? '[v]' : '[x]'} ${index + 1} - ${item.task}`);
+        // 注意，别从 0 开始，给 index 加个 1
+    })
+}
