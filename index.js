@@ -10,26 +10,24 @@ module.exports.add = async (task) => {
     await db.write(list)
 }
 
-module.exports.clear = async (task) => {
+module.exports.clear = async () => {
     await db.write([])
 }
 
-module.exports.showAll = async () => {
-    // 读取之前的任务
-    const list = await db.read()
-    // 打印之前的任务
+function printTasks(list){
     inquirer
         .prompt({
             type: 'list',
             name: 'index',
             message: '请选择你想操作的任务',
             choices: [{name: '+ 创建任务', value: '-2'},   ...list.map((item, index) => {
-                    return {name: `${item.done ? '[v]' : '[x]'} ${index + 1} - ${item.task}`, value: index.toString()}
-                }),
+                return {name: `${item.done ? '[v]' : '[x]'} ${index + 1} - ${item.task}`, value: index.toString()}
+            }),
                 {name: '<= 退出', value: '-1'}
             ]
         })
         .then(answer => {
+            // askForAction
             const index = parseInt(answer.index)
             if (index >= 0) {
                 // 用户选中了一个任务
@@ -83,7 +81,15 @@ module.exports.showAll = async () => {
                         done: false
                     })
                     db.write(list)
-                });
+                })
             }
-        });
+        })
+}
+
+module.exports.showAll = async () => {
+    // 读取之前的任务
+    const list = await db.read()
+    // 打印之前的任务
+    // printTasks
+    printTasks(list )
 }
