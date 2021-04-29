@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 const program = require('commander')
 const api = require('./index.js')
+const pkg = require('./package.json')
+// package 是 JS 的保留字，所以这里用了缩写 pkg
 
 program
-    .option('-x, --xxx', 'what the x')
+    .version(pkg.version)
+    // 如此用户即可通过 node cli --version 查看该程序的版本
 program
     .command('add')
     .description('add a task')
