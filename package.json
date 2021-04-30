@@ -1,7 +1,7 @@
 {
   "name": "nansen-node-todo",
   "bin": {
-    "t":"cli.js"
+    "t": "cli.js"
   },
   "files": [
     "*.js"
@@ -9,8 +9,14 @@
   "version": "0.0.2",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "commander": "^3.0.2",
     "inquirer": "^8.0.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }
