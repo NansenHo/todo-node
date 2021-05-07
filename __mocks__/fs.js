@@ -3,7 +3,7 @@ const _fs = jest.requireActual('fs') // _fs 是真正的 fs
 
 Object.assign(fs, _fs)
 
-const readMocks = {}
+let readMocks = {}
 
 fs.setReadFileMock = (path, error, data) => {
     readMocks[path] = [error, data]
@@ -20,7 +20,7 @@ fs.readFile = (path, options, callback) => {
     }
 }
 
-const writeMocks = {}
+let writeMocks = {}
 
 fs.setWriteFileMock = (path, fn) => {
     writeMocks[path] = fn
@@ -35,6 +35,11 @@ fs.writeFile = (path, data, options, callback) => {
     } else {
         _fs.writeFile(path, data, options, callback)
     }
+}
+
+fs.clearMocks = () => {
+    readMocks = {}
+    writeMocks = {}
 }
 
 module.exports = fs
