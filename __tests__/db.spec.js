@@ -4,9 +4,10 @@ jest.mock('fs')
 
 describe("db", ()=>{
     it("can read", async ()=>{
-        fs.setMock('/xxx', null, JSON.stringify([{title:"hi", done: false}]))
+        const data = [{title: 'hi', done: true}]
+        fs.setMock('/xxx', null, JSON.stringify(data))
         const list = await db.read("/xxx")
-        expect(list).toStrictEqual([]) // 要对比两个对象要用 toStrictEqual
+        expect(list).toStrictEqual(data) // 要对比两个对象要用 toStrictEqual
     })
 })
 
