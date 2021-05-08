@@ -26,7 +26,6 @@ const db = {
                 if (error) return reject(error)
                 resolve()
             })
-
         })
     }
 }
